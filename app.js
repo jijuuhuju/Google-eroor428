@@ -1,136 +1,46 @@
-const searchForm = document.getElementById("searchForm");
-const searchInput = document.getElementById("searchInput");
-const clearButton = document.getElementById("clearButton");
-const luckyButton = document.getElementById("luckyButton");
+// =========================================
+// 要素取得
+// =========================================
 
-const errorOverlay = document.getElementById("errorOverlay");
-const errorText = document.getElementById("errorText");
+const searchForm =
+  document.getElementById("searchForm");
 
-const finalOverlay = document.getElementById("finalOverlay");
-const typing428 = document.getElementById("typing428");
-const final428 = document.getElementById("final428");
+const searchInput =
+  document.getElementById("searchInput");
 
-const logoBack = document.querySelector(".glitch-logo-back");
+const clearButton =
+  document.getElementById("clearButton");
 
+const luckyButton =
+  document.getElementById("luckyButton");
 
-// =====================================================
-// 体験時間
-// =====================================================
+const errorOverlay =
+  document.getElementById("errorOverlay");
 
-const EXPERIENCE_TIME = 120000; // 2分
+const errorText =
+  document.getElementById("errorText");
 
-const experienceStart = Date.now();
+const finalOverlay =
+  document.getElementById("finalOverlay");
 
-function elapsed() {
-  return Date.now() - experienceStart;
-}
+const typing428 =
+  document.getElementById("typing428");
 
+const final428 =
+  document.getElementById("final428");
 
-// =====================================================
-// 文字化け
-// =====================================================
+const redFigure =
+  document.getElementById("redFigure");
 
-const mojibakeChars = [
-  "", "軥", "醳", "", "韣", "膄",
-  "铩", "ꎯ", "賥", "꺶", "ꯥ", "邑",
-  "诣", "膣", "ꛣ", "芋", "胤", "뮊",
-  "駣", "膐", "ꛣ", "莼", "郣", "莼",
-  "", "냥", "鮳", "臣", "膚", "ꏣ",
-  "膨", "ꇦ", "隙", "賣", "膓", "賣",
-  "肁", "獴", "牥", "散", "棣", "膧",
-  "鳣", "鿣", "膮", "跣", "膌", "꟣",
-  "膍", "诣", "芵", "ꓣ", "莈",
-  "聳", "瑲", "敥", "捨", "慁"
-];
-
-function mojibake(text) {
-
-  let result = "";
-
-  for (const char of text) {
-
-    if (char === " ") {
-      result += " ";
-      continue;
-    }
-
-    result +=
-      mojibakeChars[
-        Math.floor(
-          Math.random() *
-          mojibakeChars.length
-        )
-      ];
-  }
-
-  return result;
-}
+const glitchLogoBack =
+  document.querySelector(
+    ".glitch-logo-back"
+  );
 
 
-// =====================================================
-// 検索欄
-// =====================================================
-
-let converting = false;
-
-searchInput.addEventListener("input", () => {
-
-  if (converting) return;
-
-  converting = true;
-
-  const value = searchInput.value;
-
-  if (value.length > 0) {
-    searchInput.value = mojibake(value);
-  }
-
-  clearButton.style.display =
-    searchInput.value.length > 0
-      ? "block"
-      : "none";
-
-  converting = false;
-});
-
-
-// =====================================================
-// クリア
-// =====================================================
-
-clearButton.addEventListener("click", () => {
-
-  searchInput.value = "";
-
-  clearButton.style.display = "none";
-
-  searchInput.focus();
-
-});
-
-
-// =====================================================
-// 自作検索
-// =====================================================
-
-function goToResults() {
-
-  const query =
-    searchInput.value.trim();
-
-  if (!query) {
-
-    searchInput.focus();
-
-    return;
-  }
-
-  // 絶対にGoogleへ行かない
-  window.location.href =
-    "results.html?q=" +
-    encodeURIComponent(query);
-}
-
+// =========================================
+// 検索
+// =========================================
 
 searchForm.addEventListener(
   "submit",
@@ -138,461 +48,160 @@ searchForm.addEventListener(
 
     event.preventDefault();
 
-    goToResults();
+    const query =
+      searchInput.value.trim();
+
+    if (!query) return;
+
+    window.location.href =
+      "results.html?q=" +
+      encodeURIComponent(query);
 
   }
 );
 
+
+// =========================================
+// クリア
+// =========================================
+
+clearButton.addEventListener(
+  "click",
+  () => {
+
+    searchInput.value = "";
+
+    clearButton.style.display =
+      "none";
+
+    searchInput.focus();
+
+  }
+);
+
+
+// =========================================
+// 入力時にクリアボタン表示
+// =========================================
+
+searchInput.addEventListener(
+  "input",
+  () => {
+
+    clearButton.style.display =
+      searchInput.value
+        ? "block"
+        : "none";
+
+  }
+);
+
+
+// =========================================
+// I'm Feeling Lucky
+// =========================================
 
 luckyButton.addEventListener(
   "click",
   () => {
 
-    goToResults();
+    searchForm.requestSubmit();
 
   }
 );
 
 
-// =====================================================
+// =========================================
 // ロゴのノイズ
-// =====================================================
+// =========================================
 
-function logoGlitch() {
+function logoNoise() {
 
-  if (!logoBack) return;
+  // ロゴが存在しなければ何もしない
 
-  if (elapsed() >= 115000) return;
+  if (!glitchLogoBack) return;
+
+
+  // 背面ロゴを表示
+
+  glitchLogoBack.style.visibility =
+    "visible";
+
+  glitchLogoBack.style.opacity =
+    "0.65";
+
+
+  // ランダムな位置
 
   const x =
-    Math.random() * 8 - 4;
+    Math.round(
+      Math.random() * 12 - 6
+    );
 
   const y =
-    Math.random() * 8 - 4;
+    Math.round(
+      Math.random() * 8 - 4
+    );
+
+
+  // ランダムな色
 
   const hue =
-    Math.random() * 360;
+    Math.floor(
+      Math.random() * 360
+    );
 
-  logoBack.style.transform =
+
+  glitchLogoBack.style.transform =
     `translate(${x}px, ${y}px)`;
 
-  logoBack.style.filter =
+
+  glitchLogoBack.style.filter =
     `hue-rotate(${hue}deg)
-     saturate(${1.5 + Math.random() * 3})`;
+     saturate(3)`;
+
+
+  // 100ms後に完全に元へ戻す
 
   setTimeout(() => {
 
-    logoBack.style.transform =
-      "translate(2px, -1px)";
+    glitchLogoBack.style.opacity =
+      "0";
 
-    logoBack.style.filter =
-      "hue-rotate(120deg) saturate(2)";
+    glitchLogoBack.style.visibility =
+      "hidden";
+
+    glitchLogoBack.style.transform =
+      "translate(0, 0)";
+
+    glitchLogoBack.style.filter =
+      "none";
 
   }, 100);
 
 }
 
 
-const logoInterval =
-  setInterval(() => {
+// =========================================
+// ノイズ発生スケジュール
+// =========================================
 
-    if (elapsed() < 115000) {
-
-      logoGlitch();
-
-    } else {
-
-      clearInterval(logoInterval);
-
-    }
-
-  }, 3000);
-
-
-// =====================================================
-// 428勝手入力
-// =====================================================
-
-function type428() {
-
-  if (elapsed() >= 115000) return;
-
-  searchInput.focus();
-
-  searchInput.value += "428";
-
-  clearButton.style.display = "block";
-}
-
-
-function schedule428() {
+function scheduleLogoNoise() {
 
   const delay =
-    10000 +
-    Math.random() * 5000;
+    2000 +
+    Math.random() * 3000;
+
 
   setTimeout(() => {
 
-    if (elapsed() < 115000) {
+    logoNoise();
 
-      type428();
-
-      schedule428();
-
-    }
+    scheduleLogoNoise();
 
   }, delay);
-}
-
-schedule428();
-
-
-// =====================================================
-// ダークモード
-// =====================================================
-
-function darkFlash() {
-
-  if (elapsed() >= 115000) return;
-
-  document.body.classList.add(
-    "temporary-dark"
-  );
-
-  setTimeout(() => {
-
-    document.body.classList.remove(
-      "temporary-dark"
-    );
-
-  }, 200);
 
 }
 
 
-const darkInterval =
-  setInterval(() => {
-
-    if (elapsed() >= 115000) {
-
-      clearInterval(darkInterval);
-
-      return;
-    }
-
-    if (Math.random() < 0.7) {
-
-      darkFlash();
-
-    }
-
-  }, 7000);
-
-
-// =====================================================
-// ノイズ音
-// =====================================================
-
-let audioContext = null;
-
-function playNoise() {
-
-  try {
-
-    if (!audioContext) {
-
-      audioContext =
-        new (
-          window.AudioContext ||
-          window.webkitAudioContext
-        )();
-
-    }
-
-    if (
-      audioContext.state === "suspended"
-    ) {
-
-      audioContext.resume();
-
-    }
-
-    const duration = 0.18;
-
-    const buffer =
-      audioContext.createBuffer(
-        1,
-        audioContext.sampleRate * duration,
-        audioContext.sampleRate
-      );
-
-    const data =
-      buffer.getChannelData(0);
-
-    for (
-      let i = 0;
-      i < data.length;
-      i++
-    ) {
-
-      data[i] =
-        (Math.random() * 2 - 1) *
-        0.35;
-
-    }
-
-    const source =
-      audioContext.createBufferSource();
-
-    const gain =
-      audioContext.createGain();
-
-    source.buffer = buffer;
-
-    gain.gain.setValueAtTime(
-      0.08,
-      audioContext.currentTime
-    );
-
-    gain.gain.exponentialRampToValueAtTime(
-      0.001,
-      audioContext.currentTime +
-      duration
-    );
-
-    source.connect(gain);
-
-    gain.connect(
-      audioContext.destination
-    );
-
-    source.start();
-
-  } catch (error) {
-
-    // 音声が使えなくても続行
-
-  }
-}
-
-
-// =====================================================
-// Error 428
-// =====================================================
-
-function createErrorText() {
-
-  let text = "";
-
-  for (let i = 0; i < 24; i++) {
-
-    text +=
-      "Error".repeat(10) +
-      "<br>" +
-      "428".repeat(24) +
-      "<br>";
-
-  }
-
-  return text;
-}
-
-
-function showErrorEvent() {
-
-  if (elapsed() >= 115000) return;
-
-  playNoise();
-
-  errorText.innerHTML =
-    createErrorText();
-
-  errorOverlay.classList.add(
-    "active"
-  );
-
-  setTimeout(() => {
-
-    errorOverlay.classList.remove(
-      "active"
-    );
-
-  }, 1000);
-
-}
-
-
-// 20秒
-setTimeout(showErrorEvent, 20000);
-
-// 50秒
-setTimeout(showErrorEvent, 50000);
-
-// 80秒
-setTimeout(showErrorEvent, 80000);
-
-
-// =====================================================
-// 最終イベント
-// 1分40秒から
-// =====================================================
-
-let finalStarted = false;
-
-function startFinalEvent() {
-
-  if (finalStarted) return;
-
-  finalStarted = true;
-
-  errorOverlay.classList.remove(
-    "active"
-  );
-
-  document.body.classList.remove(
-    "temporary-dark"
-  );
-
-  playNoise();
-
-  finalOverlay.classList.add(
-    "active"
-  );
-
-
-  // -----------------------------------------------
-  // 0.2秒ごとに白黒
-  // -----------------------------------------------
-
-  let dark = false;
-
-  const modeInterval =
-    setInterval(() => {
-
-      dark = !dark;
-
-      finalOverlay.classList.toggle(
-        "dark-phase",
-        dark
-      );
-
-    }, 200);
-
-
-  // -----------------------------------------------
-  // 赤い428を上からタイピング
-  // -----------------------------------------------
-
-  let lines = 0;
-
-  const typingInterval =
-    setInterval(() => {
-
-      typing428.textContent +=
-        "428\n";
-
-      lines++;
-
-      if (lines >= 45) {
-
-        clearInterval(
-          typingInterval
-        );
-
-        clearInterval(
-          modeInterval
-        );
-
-
-        // 少しだけ間を置く
-
-        setTimeout(() => {
-
-          typing428.style.display =
-            "none";
-
-          finalOverlay.classList.remove(
-            "dark-phase"
-          );
-
-          finalOverlay.classList.add(
-            "blackout"
-          );
-
-
-          // ---------------------------------------
-          // 巨大な428
-          // ---------------------------------------
-
-          setTimeout(() => {
-
-            final428.classList.add(
-              "show"
-            );
-
-          }, 500);
-
-        }, 300);
-
-      }
-
-    }, 65);
-
-}
-
-
-// 1分40秒
-setTimeout(() => {
-
-  if (!document.hidden) {
-
-    startFinalEvent();
-
-  }
-
-}, 100000);
-
-
-// =====================================================
-// 2分で終了
-// =====================================================
-
-setTimeout(() => {
-
-  // 通常イベント停止
-
-  clearInterval(
-    logoInterval
-  );
-
-  clearInterval(
-    darkInterval
-  );
-
-
-  // 画面を最終状態にする
-
-  document.body.classList.remove(
-    "temporary-dark"
-  );
-
-  errorOverlay.classList.remove(
-    "active"
-  );
-
-  finalOverlay.classList.add(
-    "active"
-  );
-
-  finalOverlay.classList.add(
-    "blackout"
-  );
-
-  typing428.style.display =
-    "none";
-
-  final428.classList.add(
-    "show"
-  );
-
-}, EXPERIENCE_TIME);
+scheduleLogoNoise();
