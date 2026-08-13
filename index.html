@@ -2,67 +2,91 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
   <title>Google</title>
+
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-  <header class="header">
-    <nav class="nav">
-      <a href="#">Gmail</a>
-      <a href="#">画像</a>
-
-      <button class="apps-button" aria-label="Google アプリ">
-        ⋮⋮⋮
-      </button>
-
-      <button class="login-button">
-        ログイン
-      </button>
-    </nav>
+  <header class="top-header">
+    <a href="#" class="header-link">Gmail</a>
+    <a href="#" class="header-link">画像</a>
   </header>
 
-  <main class="main">
 
-    <div class="logo-wrapper" id="logoWrapper">
-      <img src="logo.svg" class="glitch-logo glitch-logo-back" aria-hidden="true">
-      <img src="logo.svg" class="logo glitch-logo-main" alt="Google">
+  <main class="google-main">
+
+    <!-- =================================
+         ロゴ
+    ================================== -->
+
+    <div class="logo-wrapper">
+
+      <!-- 異変時だけ表示される背面ロゴ -->
+      <img
+        src="logo.svg"
+        class="glitch-logo-back"
+        alt=""
+        aria-hidden="true"
+      >
+
+      <!-- 常に表示される正常ロゴ -->
+      <img
+        src="logo.svg"
+        class="glitch-logo-main"
+        alt="Google"
+      >
+
     </div>
 
-    <form class="search-form" id="searchForm">
+
+    <!-- =================================
+         検索フォーム
+    ================================== -->
+
+    <form id="searchForm">
 
       <div class="search-box">
 
-        <span class="search-icon">⌕</span>
-
         <input
-          type="search"
           id="searchInput"
-          name="q"
+          type="text"
           autocomplete="off"
           aria-label="検索"
         >
 
         <button
-          type="button"
-          class="clear-button"
           id="clearButton"
-          aria-label="検索内容を消去"
+          type="button"
+          aria-label="入力を消去"
         >
           ×
         </button>
 
       </div>
 
+
       <div class="search-buttons">
 
-        <button type="submit">
+        <button
+          type="submit"
+          class="search-button"
+        >
           Google 検索
         </button>
 
-        <button type="button" id="luckyButton">
+        <button
+          type="button"
+          id="luckyButton"
+          class="search-button"
+        >
           I'm Feeling Lucky
         </button>
 
@@ -70,46 +94,54 @@
 
     </form>
 
-    <div class="language">
-      Google offered in:
-      <a href="#">English</a>
-    </div>
-
   </main>
 
-  <footer class="footer">
 
-    <div class="footer-country">
-      日本
-    </div>
+  <!-- =================================
+       Error画面
+  ================================== -->
 
-    <div class="footer-links">
-
-      <div>
-        <a href="#">広告</a>
-        <a href="#">ビジネス</a>
-        <a href="#">検索の仕組み</a>
-      </div>
-
-      <div>
-        <a href="#">プライバシー</a>
-        <a href="#">規約</a>
-        <a href="#">設定</a>
-      </div>
-
-    </div>
-
-  </footer>
-
-  <div id="errorOverlay" class="error-overlay">
+  <div
+    id="errorOverlay"
+    class="error-overlay"
+  >
     <div id="errorText"></div>
   </div>
 
-  <div id="finalOverlay" class="final-overlay">
-    <div class="red-figure"></div>
-    <div id="typing428" class="typing-428"></div>
-    <div id="final428" class="final-428">428</div>
+
+  <!-- =================================
+       最終イベント
+  ================================== -->
+
+  <div
+    id="finalOverlay"
+    class="final-overlay"
+  >
+
+    <div
+      id="redFigure"
+      class="red-figure"
+    >
+      <div class="figure-head"></div>
+      <div class="figure-body"></div>
+      <div class="figure-arm figure-arm-left"></div>
+      <div class="figure-arm figure-arm-right"></div>
+    </div>
+
+    <pre
+      id="typing428"
+      class="typing428"
+    ></pre>
+
+    <div
+      id="final428"
+      class="final428"
+    >
+      428
+    </div>
+
   </div>
+
 
   <script src="app.js"></script>
 
