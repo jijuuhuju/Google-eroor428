@@ -257,3 +257,290 @@ body {
     gap: 18px;
   }
 }
+/* =========================================
+   検索結果ページ
+========================================= */
+
+.results-page {
+  margin: 0;
+  background: #fff;
+  color: #202124;
+  font-family: Arial, sans-serif;
+}
+
+
+/* =========================================
+   ヘッダー
+========================================= */
+
+.results-header {
+  height: 86px;
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+
+  gap: 32px;
+
+  padding: 14px 30px;
+
+  border-bottom: 1px solid #eee;
+}
+
+
+/* Googleロゴ */
+
+.results-logo-link {
+  display: block;
+
+  width: 120px;
+
+  flex-shrink: 0;
+}
+
+.results-logo {
+  display: block;
+
+  width: 120px;
+  height: auto;
+}
+
+
+/* =========================================
+   検索フォーム
+========================================= */
+
+.results-search-form {
+  width: min(620px, 70vw);
+}
+
+
+.results-search-box {
+  width: 100%;
+  height: 44px;
+
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+
+  border: 1px solid #dfe1e5;
+  border-radius: 24px;
+
+  background: #fff;
+
+  overflow: hidden;
+
+  transition:
+    box-shadow 0.15s,
+    border-color 0.15s;
+}
+
+
+.results-search-box:hover {
+  box-shadow:
+    0 1px 6px rgba(32, 33, 36, 0.18);
+}
+
+
+.results-search-box:focus-within {
+  border-color: transparent;
+
+  box-shadow:
+    0 1px 6px rgba(32, 33, 36, 0.28);
+}
+
+
+.results-search-box input {
+  flex: 1;
+
+  min-width: 0;
+
+  height: 100%;
+
+  padding: 0 16px;
+
+  border: none;
+  outline: none;
+
+  background: transparent;
+
+  color: #202124;
+
+  font-size: 16px;
+}
+
+
+.results-search-box button {
+  width: 52px;
+  height: 100%;
+
+  flex-shrink: 0;
+
+  border: none;
+
+  background: transparent;
+
+  cursor: pointer;
+
+  font-size: 18px;
+}
+
+
+.results-search-box button:hover {
+  background: #f8f9fa;
+}
+
+
+/* =========================================
+   検索結果本体
+========================================= */
+
+.results-main {
+  width: min(700px, 90vw);
+
+  margin-left: 170px;
+
+  padding-top: 25px;
+}
+
+
+/* =========================================
+   もしかして
+========================================= */
+
+.suggestion {
+  margin-bottom: 18px;
+
+  color: #202124;
+
+  font-size: 14px;
+}
+
+
+.suggestion a {
+  color: #1a0dab;
+
+  text-decoration: none;
+}
+
+
+.suggestion a:hover {
+  text-decoration: underline;
+}
+
+
+/* =========================================
+   件数
+========================================= */
+
+.result-count {
+  margin-bottom: 26px;
+
+  color: #70757a;
+
+  font-size: 13px;
+}
+
+
+/* =========================================
+   個々の検索結果
+========================================= */
+
+.search-result {
+  margin-bottom: 30px;
+}
+
+
+.result-title {
+  display: inline-block;
+
+  color: #1a0dab;
+
+  font-size: 20px;
+
+  line-height: 1.3;
+
+  text-decoration: none;
+
+  cursor: default;
+}
+
+
+.result-title:hover {
+  text-decoration: underline;
+}
+
+
+.result-url {
+  margin-top: 4px;
+
+  color: #188038;
+
+  font-size: 14px;
+
+  line-height: 1.3;
+
+  word-break: break-all;
+}
+
+
+.result-description {
+  margin-top: 5px;
+  margin-bottom: 0;
+
+  color: #4d5156;
+
+  font-size: 14px;
+
+  line-height: 1.55;
+
+  word-break: break-all;
+}
+
+
+/* =========================================
+   スマホ・狭い画面
+========================================= */
+
+@media (max-width: 700px) {
+
+  .results-header {
+    height: auto;
+
+    padding: 12px 15px;
+
+    gap: 15px;
+  }
+
+
+  .results-logo-link {
+    width: 90px;
+  }
+
+
+  .results-logo {
+    width: 90px;
+  }
+
+
+  .results-search-form {
+    width: 100%;
+  }
+
+
+  .results-main {
+    width: calc(100% - 30px);
+
+    margin-left: auto;
+    margin-right: auto;
+
+    padding-top: 20px;
+  }
+
+
+  .result-title {
+    font-size: 18px;
+  }
+
+}
