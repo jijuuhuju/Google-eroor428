@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Google</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="results-page">
+
+  <!-- ==============================
+       ヘッダー
+  =============================== -->
+
+  <header class="results-header">
+
+    <a href="index.html" class="results-logo-link">
+
+      <img
+        src="logo.svg"
+        alt="Google"
+        class="results-logo"
+      >
+
+    </a>
+
+
+    <!-- 検索バー -->
+
+    <form
+      id="resultsSearchForm"
+      class="results-search-form"
+    >
+
+      <div class="results-search-box">
+
+        <input
+          type="search"
+          id="resultsSearchInput"
+          autocomplete="off"
+          aria-label="検索"
+        >
+
+        <button
+          type="submit"
+          aria-label="検索"
+        >
+          🔍
+        </button>
+
+      </div>
+
+    </form>
+
+  </header>
+
+
+  <!-- ==============================
+       検索結果
+  =============================== -->
+
+  <main class="results-main">
+
+    <div class="suggestion">
+
+      もしかして:
+
+      <a
+        href="#"
+        id="suggestionLink"
+      >
+        䕲牯爴㈸
+      </a>
+
+    </div>
+
+
+    <div class="result-count">
+
+      約 428,000,000 件
+
+    </div>
+
+
+    <!-- results.js がここに15件生成する -->
+
+    <div
+      id="results"
+      class="results"
+    ></div>
+
+  </main>
+
+
+  <!-- ==============================
+       JavaScript
+  =============================== -->
+
+  <script src="results.js"></script>
+
+</body>
+
+</html>
