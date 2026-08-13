@@ -303,8 +303,8 @@ function logoNoise() {
 function scheduleLogoNoise() {
 
   const delay =
-    2000 +
-    Math.random() * 3000;
+    500 +
+    Math.random() * 1000;
 
 
   setTimeout(() => {
