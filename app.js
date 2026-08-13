@@ -14,35 +14,63 @@ const clearButton =
 const luckyButton =
   document.getElementById("luckyButton");
 
-const errorOverlay =
-  document.getElementById("errorOverlay");
-
-const errorText =
-  document.getElementById("errorText");
-
-const finalOverlay =
-  document.getElementById("finalOverlay");
-
-const typing428 =
-  document.getElementById("typing428");
-
-const final428 =
-  document.getElementById("final428");
-
-const redFigure =
-  document.getElementById("redFigure");
-
 const glitchLogoBack =
-  document.querySelector(
-    ".glitch-logo-back"
-  );
+  document.querySelector(".glitch-logo-back");
 
 
 // =========================================
-// 検索用の本来の文字
+// 本来の検索文字
 // =========================================
 
 let realSearchValue = "";
+
+let mojibakeTimer = null;
+
+let isMojibakeDisplay = false;
+
+
+// =========================================
+// 文字化け文字
+// =========================================
+
+const mojibakeCharacters = [
+  "","軥","醳","","韣","膄",
+  "铩","ꎯ","賥","꺶","ꯥ","邑",
+  "诣","膣","ꛣ","芋","胤","뮊",
+  "駣","膐","莼","郣","","냥",
+  "鮳","臣","膚","ꏣ","膨"
+];
+
+
+// =========================================
+// 文字化け生成
+// =========================================
+
+function createMojibake(text) {
+
+  let result = "";
+
+  for (const char of text) {
+
+    const count =
+      2 + Math.floor(Math.random() * 3);
+
+    for (let i = 0; i < count; i++) {
+
+      result +=
+        mojibakeCharacters[
+          Math.floor(
+            Math.random() *
+            mojibakeCharacters.length
+          )
+        ];
+
+    }
+
+  }
+
+  return result;
+}
 
 
 // =========================================
@@ -60,9 +88,61 @@ searchForm.addEventListener(
 
     if (!query) return;
 
+    // 外部Googleには絶対移動しない
+
     window.location.href =
       "results.html?q=" +
       encodeURIComponent(query);
+
+  }
+);
+
+
+// =========================================
+// 入力
+// =========================================
+
+searchInput.addEventListener(
+  "input",
+  () => {
+
+    if (!isMojibakeDisplay) {
+
+      realSearchValue =
+        searchInput.value;
+
+    }
+
+    clearButton.style.display =
+      realSearchValue
+        ? "block"
+        : "none";
+
+    clearTimeout(
+      mojibakeTimer
+    );
+
+    if (!realSearchValue) {
+
+      isMojibakeDisplay = false;
+
+      searchInput.value = "";
+
+      return;
+
+    }
+
+    mojibakeTimer =
+      setTimeout(() => {
+
+        isMojibakeDisplay = true;
+
+        searchInput.value =
+          createMojibake(
+            realSearchValue
+          );
+
+      }, 300);
 
   }
 );
@@ -76,7 +156,13 @@ clearButton.addEventListener(
   "click",
   () => {
 
+    clearTimeout(
+      mojibakeTimer
+    );
+
     realSearchValue = "";
+
+    isMojibakeDisplay = false;
 
     searchInput.value = "";
 
@@ -84,129 +170,6 @@ clearButton.addEventListener(
       "none";
 
     searchInput.focus();
-
-  }
-);
-
-
-// =========================================
-// 文字化け生成
-// =========================================
-
-function mojibake(text) {
-
-  let result = "";
-
-  for (const char of text) {
-
-    const code =
-      char.charCodeAt(0);
-
-    // 日本語などをそれっぽい
-    // 文字化け文字へ変換
-
-    if (code > 127) {
-
-      const a =
-        0xE000 +
-        ((code * 37) % 0x0FFF);
-
-      const b =
-        0x4E00 +
-        ((code * 17) % 0x3000);
-
-      result +=
-        String.fromCharCode(a) +
-        String.fromCharCode(b);
-
-    } else {
-
-      // 英数字は一部だけ変化
-
-      if (Math.random() < 0.35) {
-
-        result +=
-          String.fromCharCode(
-            0xE000 +
-            Math.floor(
-              Math.random() * 0x0FFF
-            )
-          );
-
-      } else {
-
-        result += char;
-
-      }
-
-    }
-
-  }
-
-  return result;
-}
-
-
-// =========================================
-// 異変2
-// 検索バーの文字化け
-// =========================================
-
-let mojibakeTimer = null;
-
-searchInput.addEventListener(
-  "input",
-  () => {
-
-    // 本来の入力内容を保存
-
-    realSearchValue =
-      searchInput.value;
-
-
-    // クリアボタン
-
-    clearButton.style.display =
-      realSearchValue
-        ? "block"
-        : "none";
-
-
-    // 前のタイマーを解除
-
-    clearTimeout(
-      mojibakeTimer
-    );
-
-
-    if (!realSearchValue) {
-
-      searchInput.value = "";
-
-      return;
-
-    }
-
-
-    /*
-      入力を止めて0.3秒後に
-      文字化けする
-    */
-
-    mojibakeTimer =
-      setTimeout(() => {
-
-        /*
-          表示だけ文字化けさせる。
-          realSearchValueは正常なまま。
-        */
-
-        searchInput.value =
-          mojibake(
-            realSearchValue
-          );
-
-      }, 300);
 
   }
 );
@@ -228,24 +191,18 @@ luckyButton.addEventListener(
 
 // =========================================
 // 異変1
-// ロゴのノイズ
+// ロゴノイズ
 // =========================================
 
 function logoNoise() {
 
   if (!glitchLogoBack) return;
 
-
-  // 背面ロゴを表示
-
   glitchLogoBack.style.visibility =
     "visible";
 
   glitchLogoBack.style.opacity =
     "0.65";
-
-
-  // 少しズレる
 
   const x =
     Math.round(
@@ -257,25 +214,16 @@ function logoNoise() {
       Math.random() * 8 - 4
     );
 
-
-  // 色を変える
-
   const hue =
     Math.floor(
       Math.random() * 360
     );
 
-
   glitchLogoBack.style.transform =
     `translate(${x}px, ${y}px)`;
 
-
   glitchLogoBack.style.filter =
-    `hue-rotate(${hue}deg)
-     saturate(3)`;
-
-
-  // 100ms後に戻す
+    `hue-rotate(${hue}deg) saturate(3)`;
 
   setTimeout(() => {
 
@@ -296,16 +244,11 @@ function logoNoise() {
 }
 
 
-// =========================================
-// ロゴノイズの発生間隔
-// =========================================
-
 function scheduleLogoNoise() {
 
   const delay =
     500 +
     Math.random() * 1000;
-
 
   setTimeout(() => {
 
@@ -317,5 +260,218 @@ function scheduleLogoNoise() {
 
 }
 
-
 scheduleLogoNoise();
+
+
+// =========================================
+// 異変3
+// 勝手に428が入力される
+// =========================================
+
+function type428() {
+
+  if (
+    document.activeElement ===
+    searchInput
+  ) {
+
+    isMojibakeDisplay = false;
+
+    realSearchValue = "";
+
+    searchInput.value = "";
+
+  }
+
+  const text = "428";
+
+  let index = 0;
+
+  const timer =
+    setInterval(() => {
+
+      if (index >= text.length) {
+
+        clearInterval(timer);
+
+        return;
+
+      }
+
+      realSearchValue +=
+        text[index];
+
+      searchInput.value =
+        realSearchValue;
+
+      clearButton.style.display =
+        "block";
+
+      index++;
+
+    }, 90);
+
+}
+
+
+// =========================================
+// 428異変のランダム発生
+// =========================================
+
+function schedule428() {
+
+  const delay =
+    7000 +
+    Math.random() * 10000;
+
+  setTimeout(() => {
+
+    type428();
+
+    schedule428();
+
+  }, delay);
+
+}
+
+schedule428();
+
+
+// =========================================
+// 異変4
+// 一瞬だけダークモード
+// =========================================
+
+function temporaryDarkMode() {
+
+  document.body.classList.add(
+    "temporary-dark"
+  );
+
+  setTimeout(() => {
+
+    document.body.classList.remove(
+      "temporary-dark"
+    );
+
+  }, 250);
+
+}
+
+
+function scheduleDarkMode() {
+
+  const delay =
+    10000 +
+    Math.random() * 15000;
+
+  setTimeout(() => {
+
+    temporaryDarkMode();
+
+    scheduleDarkMode();
+
+  }, delay);
+
+}
+
+scheduleDarkMode();
+
+
+// =========================================
+// 異変5
+// Error428画面
+// =========================================
+
+function createErrorScreen() {
+
+  const overlay =
+    document.createElement("div");
+
+  overlay.style.position =
+    "fixed";
+
+  overlay.style.inset = "0";
+
+  overlay.style.zIndex =
+    "99999";
+
+  overlay.style.background =
+    "#000";
+
+  overlay.style.color =
+    "#f00";
+
+  overlay.style.fontFamily =
+    "monospace";
+
+  overlay.style.fontWeight =
+    "bold";
+
+  overlay.style.fontSize =
+    "32px";
+
+  overlay.style.lineHeight =
+    "1.05";
+
+  overlay.style.padding =
+    "10px";
+
+  overlay.style.whiteSpace =
+    "pre-wrap";
+
+  overlay.style.overflow =
+    "hidden";
+
+  let text = "";
+
+  for (let i = 0; i < 18; i++) {
+
+    text +=
+      "Error".repeat(20) +
+      "\n";
+
+    text +=
+      "428".repeat(35) +
+      "\n";
+
+  }
+
+  overlay.textContent = text;
+
+  document.body.appendChild(
+    overlay
+  );
+
+  // 短時間だけ表示
+
+  setTimeout(() => {
+
+    overlay.remove();
+
+  }, 900);
+
+}
+
+
+// =========================================
+// Error428のランダム発生
+// =========================================
+
+function scheduleError() {
+
+  const delay =
+    18000 +
+    Math.random() * 20000;
+
+  setTimeout(() => {
+
+    createErrorScreen();
+
+    scheduleError();
+
+  }, delay);
+
+}
+
+scheduleError();
