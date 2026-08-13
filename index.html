@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Google</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <header class="header">
+    <nav class="nav">
+      <a href="#">Gmail</a>
+      <a href="#">画像</a>
+
+      <button class="apps-button" aria-label="Google アプリ">
+        ⋮⋮⋮
+      </button>
+
+      <button class="login-button">
+        ログイン
+      </button>
+    </nav>
+  </header>
+
+  <main class="main">
+
+    <div class="logo-wrapper" id="logoWrapper">
+      <img src="logo.svg" class="glitch-logo glitch-logo-back" aria-hidden="true">
+      <img src="logo.svg" class="logo glitch-logo-main" alt="Google">
+    </div>
+
+    <form class="search-form" id="searchForm">
+
+      <div class="search-box">
+
+        <span class="search-icon">⌕</span>
+
+        <input
+          type="search"
+          id="searchInput"
+          name="q"
+          autocomplete="off"
+          aria-label="検索"
+        >
+
+        <button
+          type="button"
+          class="clear-button"
+          id="clearButton"
+          aria-label="検索内容を消去"
+        >
+          ×
+        </button>
+
+      </div>
+
+      <div class="search-buttons">
+
+        <button type="submit">
+          Google 検索
+        </button>
+
+        <button type="button" id="luckyButton">
+          I'm Feeling Lucky
+        </button>
+
+      </div>
+
+    </form>
+
+    <div class="language">
+      Google offered in:
+      <a href="#">English</a>
+    </div>
+
+  </main>
+
+  <footer class="footer">
+
+    <div class="footer-country">
+      日本
+    </div>
+
+    <div class="footer-links">
+
+      <div>
+        <a href="#">広告</a>
+        <a href="#">ビジネス</a>
+        <a href="#">検索の仕組み</a>
+      </div>
+
+      <div>
+        <a href="#">プライバシー</a>
+        <a href="#">規約</a>
+        <a href="#">設定</a>
+      </div>
+
+    </div>
+
+  </footer>
+
+  <div id="errorOverlay" class="error-overlay">
+    <div id="errorText"></div>
+  </div>
+
+  <div id="finalOverlay" class="final-overlay">
+    <div class="red-figure"></div>
+    <div id="typing428" class="typing-428"></div>
+    <div id="final428" class="final-428">428</div>
+  </div>
+
+  <script src="app.js"></script>
+
+</body>
+</html>
