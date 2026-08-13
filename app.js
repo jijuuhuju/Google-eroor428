@@ -39,6 +39,13 @@ const glitchLogoBack =
 
 
 // =========================================
+// 検索用の本来の文字
+// =========================================
+
+let realSearchValue = "";
+
+
+// =========================================
 // 検索
 // =========================================
 
@@ -49,7 +56,7 @@ searchForm.addEventListener(
     event.preventDefault();
 
     const query =
-      searchInput.value.trim();
+      realSearchValue.trim();
 
     if (!query) return;
 
@@ -69,6 +76,8 @@ clearButton.addEventListener(
   "click",
   () => {
 
+    realSearchValue = "";
+
     searchInput.value = "";
 
     clearButton.style.display =
@@ -81,17 +90,123 @@ clearButton.addEventListener(
 
 
 // =========================================
-// 入力時にクリアボタン表示
+// 文字化け生成
 // =========================================
+
+function mojibake(text) {
+
+  let result = "";
+
+  for (const char of text) {
+
+    const code =
+      char.charCodeAt(0);
+
+    // 日本語などをそれっぽい
+    // 文字化け文字へ変換
+
+    if (code > 127) {
+
+      const a =
+        0xE000 +
+        ((code * 37) % 0x0FFF);
+
+      const b =
+        0x4E00 +
+        ((code * 17) % 0x3000);
+
+      result +=
+        String.fromCharCode(a) +
+        String.fromCharCode(b);
+
+    } else {
+
+      // 英数字は一部だけ変化
+
+      if (Math.random() < 0.35) {
+
+        result +=
+          String.fromCharCode(
+            0xE000 +
+            Math.floor(
+              Math.random() * 0x0FFF
+            )
+          );
+
+      } else {
+
+        result += char;
+
+      }
+
+    }
+
+  }
+
+  return result;
+}
+
+
+// =========================================
+// 異変2
+// 検索バーの文字化け
+// =========================================
+
+let mojibakeTimer = null;
 
 searchInput.addEventListener(
   "input",
   () => {
 
+    // 本来の入力内容を保存
+
+    realSearchValue =
+      searchInput.value;
+
+
+    // クリアボタン
+
     clearButton.style.display =
-      searchInput.value
+      realSearchValue
         ? "block"
         : "none";
+
+
+    // 前のタイマーを解除
+
+    clearTimeout(
+      mojibakeTimer
+    );
+
+
+    if (!realSearchValue) {
+
+      searchInput.value = "";
+
+      return;
+
+    }
+
+
+    /*
+      入力を止めて0.3秒後に
+      文字化けする
+    */
+
+    mojibakeTimer =
+      setTimeout(() => {
+
+        /*
+          表示だけ文字化けさせる。
+          realSearchValueは正常なまま。
+        */
+
+        searchInput.value =
+          mojibake(
+            realSearchValue
+          );
+
+      }, 300);
 
   }
 );
@@ -112,12 +227,11 @@ luckyButton.addEventListener(
 
 
 // =========================================
+// 異変1
 // ロゴのノイズ
 // =========================================
 
 function logoNoise() {
-
-  // ロゴが存在しなければ何もしない
 
   if (!glitchLogoBack) return;
 
@@ -131,7 +245,7 @@ function logoNoise() {
     "0.65";
 
 
-  // ランダムな位置
+  // 少しズレる
 
   const x =
     Math.round(
@@ -144,7 +258,7 @@ function logoNoise() {
     );
 
 
-  // ランダムな色
+  // 色を変える
 
   const hue =
     Math.floor(
@@ -161,7 +275,7 @@ function logoNoise() {
      saturate(3)`;
 
 
-  // 100ms後に完全に元へ戻す
+  // 100ms後に戻す
 
   setTimeout(() => {
 
@@ -183,7 +297,7 @@ function logoNoise() {
 
 
 // =========================================
-// ノイズ発生スケジュール
+// ロゴノイズの発生間隔
 // =========================================
 
 function scheduleLogoNoise() {
