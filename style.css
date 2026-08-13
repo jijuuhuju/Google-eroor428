@@ -1,23 +1,36 @@
+/* =========================================
+   全体
+========================================= */
+
 * {
   box-sizing: border-box;
 }
 
+html,
 body {
   margin: 0;
+  padding: 0;
 
-  min-height: 100vh;
-
-  background: #fff;
-
-  color: #202124;
+  width: 100%;
+  min-height: 100%;
 
   font-family:
     Arial,
+    Helvetica,
     sans-serif;
+}
+
+body {
+  min-height: 100vh;
+
+  background: #fff;
+  color: #202124;
+
+  overflow-x: hidden;
 
   transition:
-    background 0.1s,
-    color 0.1s;
+    background 0.1s ease,
+    color 0.1s ease;
 }
 
 
@@ -32,10 +45,13 @@ body {
   right: 0;
 
   display: flex;
+  align-items: center;
 
-  gap: 22px;
+  gap: 20px;
 
   padding: 18px 24px;
+
+  z-index: 10;
 }
 
 .header-link {
@@ -46,12 +62,17 @@ body {
   text-decoration: none;
 }
 
+.header-link:hover {
+  text-decoration: underline;
+}
+
 
 /* =========================================
-   Google本体
+   Googleメイン
 ========================================= */
 
 .google-main {
+  width: 100%;
   min-height: 100vh;
 
   display: flex;
@@ -59,7 +80,6 @@ body {
   flex-direction: column;
 
   align-items: center;
-
   justify-content: center;
 
   padding-bottom: 120px;
@@ -75,18 +95,15 @@ body {
 
   width: 276px;
 
-  height: auto;
-
-  margin-bottom: 28px;
+  margin-bottom: 30px;
 }
 
 
 /*
-   背面ロゴ
+   背面の異常ロゴ
 
-   普段は完全に見えない。
-   JavaScriptが異変を起こしたときだけ
-   opacityを変更する。
+   普段は完全に非表示。
+   JavaScriptから一瞬だけ表示する。
 */
 
 .glitch-logo-back {
@@ -112,8 +129,6 @@ body {
     translate(0, 0);
 
   filter: none;
-
-  transition: none;
 }
 
 
@@ -136,12 +151,17 @@ body {
 
 
 /* =========================================
-   検索バー
+   検索フォーム
 ========================================= */
 
 #searchForm {
   width: min(584px, 90vw);
 }
+
+
+/* =========================================
+   検索ボックス
+========================================= */
 
 .search-box {
   position: relative;
@@ -150,30 +170,33 @@ body {
   height: 46px;
 
   display: flex;
-
   align-items: center;
-
-  border:
-    1px solid #dfe1e5;
-
-  border-radius: 24px;
 
   background: #fff;
 
+  border: 1px solid #dfe1e5;
+
+  border-radius: 24px;
+
   transition:
-    box-shadow 0.15s,
-    border-color 0.15s;
+    box-shadow 0.15s ease,
+    border-color 0.15s ease;
 }
 
 .search-box:hover,
 .search-box:focus-within {
-  box-shadow:
-    0 1px 6px
-    rgba(32, 33, 36, 0.2);
-
   border-color:
     rgba(223, 225, 229, 0);
+
+  box-shadow:
+    0 1px 6px
+    rgba(32, 33, 36, 0.18);
 }
+
+
+/* =========================================
+   入力欄
+========================================= */
 
 #searchInput {
   width: 100%;
@@ -183,7 +206,6 @@ body {
     0 48px 0 20px;
 
   border: none;
-
   outline: none;
 
   background: transparent;
@@ -193,13 +215,18 @@ body {
   font-size: 16px;
 }
 
+
+/* =========================================
+   クリアボタン
+========================================= */
+
 #clearButton {
   position: absolute;
 
-  right: 14px;
+  right: 12px;
 
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
 
   display: none;
 
@@ -211,12 +238,18 @@ body {
 
   font-size: 22px;
 
+  line-height: 32px;
+
   cursor: pointer;
+}
+
+#clearButton:hover {
+  color: #202124;
 }
 
 
 /* =========================================
-   ボタン
+   検索ボタン
 ========================================= */
 
 .search-buttons {
@@ -271,9 +304,21 @@ body.temporary-dark
   color: #fff;
 }
 
+body.temporary-dark
+.search-box {
+  background: #202124;
+
+  border-color: #5f6368;
+}
+
+body.temporary-dark
+#searchInput {
+  color: #fff;
+}
+
 
 /* =========================================
-   Error
+   Error画面
 ========================================= */
 
 .error-overlay {
@@ -291,11 +336,14 @@ body.temporary-dark
 
   color: #f00;
 
-  font-family: monospace;
+  font-family:
+    monospace;
 
   font-size: 32px;
 
   font-weight: bold;
+
+  line-height: 1.1;
 }
 
 .error-overlay.active {
@@ -305,7 +353,9 @@ body.temporary-dark
 #errorText {
   padding: 10px;
 
-  line-height: 1.1;
+  white-space: pre-wrap;
+
+  word-break: break-all;
 }
 
 
@@ -370,6 +420,9 @@ body.temporary-dark
     figureMove 4s linear infinite;
 }
 
+
+/* 頭 */
+
 .figure-head {
   position: absolute;
 
@@ -386,6 +439,9 @@ body.temporary-dark
 
   border-radius: 50%;
 }
+
+
+/* 体 */
 
 .figure-body {
   position: absolute;
@@ -405,6 +461,9 @@ body.temporary-dark
     45px 45px 12px 12px;
 }
 
+
+/* 腕 */
+
 .figure-arm {
   position: absolute;
 
@@ -421,14 +480,21 @@ body.temporary-dark
 .figure-arm-left {
   left: 12px;
 
-  transform: rotate(12deg);
+  transform:
+    rotate(12deg);
 }
 
 .figure-arm-right {
   right: 12px;
 
-  transform: rotate(-12deg);
+  transform:
+    rotate(-12deg);
 }
+
+
+/* =========================================
+   人影移動
+========================================= */
 
 @keyframes figureMove {
 
@@ -465,7 +531,7 @@ body.temporary-dark
 
 
 /* =========================================
-   428
+   428大量表示
 ========================================= */
 
 .typing428 {
@@ -475,15 +541,18 @@ body.temporary-dark
 
   z-index: 2;
 
-  margin: 0;
+  width: 100%;
+  height: 100%;
 
+  margin: 0;
   padding: 10px;
 
   overflow: hidden;
 
   color: #d00000;
 
-  font-family: monospace;
+  font-family:
+    monospace;
 
   font-size: 42px;
 
@@ -496,7 +565,15 @@ body.temporary-dark
   word-break: break-all;
 
   pointer-events: none;
+
+  text-shadow:
+    0 0 8px #ff0000;
 }
+
+
+/* =========================================
+   最後の巨大な428
+========================================= */
 
 .final428 {
   position: absolute;
@@ -508,12 +585,16 @@ body.temporary-dark
   display: flex;
 
   align-items: center;
-
   justify-content: center;
 
   opacity: 0;
 
   color: #d00000;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
 
   font-size:
     min(35vw, 420px);
@@ -521,8 +602,41 @@ body.temporary-dark
   font-weight: 900;
 
   pointer-events: none;
+
+  text-shadow:
+    0 0 20px #ff0000,
+    0 0 50px #900000;
 }
 
 .final428.show {
   opacity: 1;
+}
+
+
+/* =========================================
+   スマホ対応
+========================================= */
+
+@media (max-width: 600px) {
+
+  .logo-wrapper {
+    width: 230px;
+  }
+
+  #searchForm {
+    width: 90vw;
+  }
+
+  .search-buttons {
+    flex-wrap: wrap;
+  }
+
+  .typing428 {
+    font-size: 28px;
+  }
+
+  .final428 {
+    font-size: 40vw;
+  }
+
 }
