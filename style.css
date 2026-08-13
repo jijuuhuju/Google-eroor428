@@ -2,270 +2,22 @@
   box-sizing: border-box;
 }
 
-html,
 body {
   margin: 0;
-  padding: 0;
-  width: 100%;
-  min-height: 100%;
-  font-family: Arial, Helvetica, sans-serif;
-  color: #202124;
-}
 
-body {
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
 
-/* ヘッダー */
-
-.header {
-  width: 100%;
-}
-
-.nav {
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 20px;
-  padding: 0 24px;
-  font-size: 13px;
-}
-
-.nav a {
-  color: #202124;
-  text-decoration: none;
-}
-
-.nav a:hover {
-  text-decoration: underline;
-}
-
-.apps-button {
-  border: 0;
-  background: transparent;
-  cursor: pointer;
-  font-size: 22px;
-  line-height: 1;
-  color: #5f6368;
-  padding: 8px;
-  border-radius: 50%;
-}
-
-.apps-button:hover {
-  background: #f1f3f4;
-}
-
-.login-button {
-  border: 0;
-  background: #1a73e8;
-  color: white;
-  padding: 10px 18px;
-  border-radius: 4px;
-  font-size: 14px;
-  cursor: pointer;
-}
-
-.login-button:hover {
-  background: #1558b0;
-}
-
-/* メイン */
-
-.main {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 150px;
-}
-
-.logo {
-  width: 276px;
-  height: auto;
-  display: block;
-  margin-bottom: 30px;
-}
-
-/* 検索 */
-
-.search-form {
-  width: 100%;
-  max-width: 584px;
-}
-
-.search-box {
-  width: 100%;
-  height: 46px;
-  display: flex;
-  align-items: center;
-  border: 1px solid #dfe1e5;
-  border-radius: 24px;
-  padding: 0 14px;
-  transition: box-shadow 0.15s ease;
-}
-
-.search-box:hover,
-.search-box:focus-within {
-  border-color: transparent;
-  box-shadow:
-    0 1px 6px rgba(32, 33, 36, 0.18);
-}
-
-.search-icon {
-  color: #9aa0a6;
-  font-size: 25px;
-  margin-right: 10px;
-  transform: rotate(-20deg);
-}
-
-.search-box input {
-  flex: 1;
-  height: 100%;
-  border: 0;
-  outline: 0;
-  background: transparent;
-  color: #202124;
-  font-size: 16px;
-}
-
-.clear-button {
-  display: none;
-  border: 0;
-  background: transparent;
-  color: #5f6368;
-  font-size: 22px;
-  cursor: pointer;
-}
-
-/* 検索ボタン */
-
-.search-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  margin-top: 28px;
-}
-
-.search-buttons button {
-  border: 1px solid #f8f9fa;
-  background: #f8f9fa;
-  color: #3c4043;
-  padding: 10px 17px;
-  border-radius: 4px;
-  font-size: 14px;
-  cursor: pointer;
-}
-
-.search-buttons button:hover {
-  border-color: #dadce0;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-}
-
-/* 言語 */
-
-.language {
-  margin-top: 30px;
-  font-size: 13px;
-  color: #3c4043;
-}
-
-.language a {
-  color: #1a0dab;
-  text-decoration: none;
-  margin-left: 5px;
-}
-
-.language a:hover {
-  text-decoration: underline;
-}
-
-/* フッター */
-
-.footer {
-  background: #f2f2f2;
-  color: #70757a;
-  font-size: 14px;
-}
-
-.footer-country {
-  padding: 15px 30px;
-  border-bottom: 1px solid #dadce0;
-}
-
-.footer-links {
-  min-height: 46px;
-  padding: 0 30px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.footer-links div {
-  display: flex;
-  gap: 28px;
-}
-
-.footer a {
-  color: #70757a;
-  text-decoration: none;
-}
-
-.footer a:hover {
-  text-decoration: underline;
-}
-
-/* スマホ・タブレット */
-
-@media (max-width: 600px) {
-  .nav {
-    padding: 0 14px;
-    gap: 12px;
-  }
-
-  .nav a {
-    display: none;
-  }
-
-  .main {
-    padding: 100px 20px 40px;
-  }
-
-  .logo {
-    width: min(276px, 75vw);
-  }
-
-  .search-form {
-    max-width: 100%;
-  }
-
-  .search-buttons {
-    flex-wrap: wrap;
-  }
-
-  .footer-links {
-    flex-direction: column;
-    gap: 18px;
-    padding: 15px;
-  }
-
-  .footer-links div {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 18px;
-  }
-}
-/* =========================================
-   検索結果ページ
-========================================= */
-
-.results-page {
-  margin: 0;
   background: #fff;
+
   color: #202124;
-  font-family: Arial, sans-serif;
+
+  font-family:
+    Arial,
+    sans-serif;
+
+  transition:
+    background 0.1s,
+    color 0.1s;
 }
 
 
@@ -273,94 +25,165 @@ body {
    ヘッダー
 ========================================= */
 
-.results-header {
-  height: 86px;
-  box-sizing: border-box;
+.top-header {
+  position: absolute;
+
+  top: 0;
+  right: 0;
 
   display: flex;
-  align-items: center;
 
-  gap: 32px;
+  gap: 22px;
 
-  padding: 14px 30px;
-
-  border-bottom: 1px solid #eee;
+  padding: 18px 24px;
 }
 
+.header-link {
+  color: #202124;
 
-/* Googleロゴ */
+  font-size: 14px;
 
-.results-logo-link {
-  display: block;
-
-  width: 120px;
-
-  flex-shrink: 0;
-}
-
-.results-logo {
-  display: block;
-
-  width: 120px;
-  height: auto;
+  text-decoration: none;
 }
 
 
 /* =========================================
-   検索フォーム
+   Google本体
 ========================================= */
 
-.results-search-form {
-  width: min(620px, 70vw);
+.google-main {
+  min-height: 100vh;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding-bottom: 120px;
 }
 
 
-.results-search-box {
-  width: 100%;
-  height: 44px;
+/* =========================================
+   ロゴ
+========================================= */
 
-  box-sizing: border-box;
+.logo-wrapper {
+  position: relative;
+
+  width: 276px;
+
+  height: auto;
+
+  margin-bottom: 28px;
+}
+
+
+/*
+   背面ロゴ
+
+   普段は完全に見えない。
+   JavaScriptが異変を起こしたときだけ
+   opacityを変更する。
+*/
+
+.glitch-logo-back {
+  position: absolute;
+
+  left: 0;
+  top: 0;
+
+  display: block;
+
+  width: 100%;
+  height: auto;
+
+  opacity: 0;
+
+  visibility: hidden;
+
+  z-index: 1;
+
+  pointer-events: none;
+
+  transform:
+    translate(0, 0);
+
+  filter: none;
+
+  transition: none;
+}
+
+
+/*
+   正常ロゴ
+*/
+
+.glitch-logo-main {
+  position: relative;
+
+  display: block;
+
+  width: 100%;
+  height: auto;
+
+  z-index: 2;
+
+  pointer-events: none;
+}
+
+
+/* =========================================
+   検索バー
+========================================= */
+
+#searchForm {
+  width: min(584px, 90vw);
+}
+
+.search-box {
+  position: relative;
+
+  width: 100%;
+  height: 46px;
 
   display: flex;
+
   align-items: center;
 
-  border: 1px solid #dfe1e5;
+  border:
+    1px solid #dfe1e5;
+
   border-radius: 24px;
 
   background: #fff;
-
-  overflow: hidden;
 
   transition:
     box-shadow 0.15s,
     border-color 0.15s;
 }
 
-
-.results-search-box:hover {
+.search-box:hover,
+.search-box:focus-within {
   box-shadow:
-    0 1px 6px rgba(32, 33, 36, 0.18);
+    0 1px 6px
+    rgba(32, 33, 36, 0.2);
+
+  border-color:
+    rgba(223, 225, 229, 0);
 }
 
-
-.results-search-box:focus-within {
-  border-color: transparent;
-
-  box-shadow:
-    0 1px 6px rgba(32, 33, 36, 0.28);
-}
-
-
-.results-search-box input {
-  flex: 1;
-
-  min-width: 0;
-
+#searchInput {
+  width: 100%;
   height: 100%;
 
-  padding: 0 16px;
+  padding:
+    0 48px 0 20px;
 
   border: none;
+
   outline: none;
 
   background: transparent;
@@ -370,177 +193,336 @@ body {
   font-size: 16px;
 }
 
+#clearButton {
+  position: absolute;
 
-.results-search-box button {
-  width: 52px;
-  height: 100%;
+  right: 14px;
 
-  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+
+  display: none;
 
   border: none;
 
   background: transparent;
 
-  cursor: pointer;
-
-  font-size: 18px;
-}
-
-
-.results-search-box button:hover {
-  background: #f8f9fa;
-}
-
-
-/* =========================================
-   検索結果本体
-========================================= */
-
-.results-main {
-  width: min(700px, 90vw);
-
-  margin-left: 170px;
-
-  padding-top: 25px;
-}
-
-
-/* =========================================
-   もしかして
-========================================= */
-
-.suggestion {
-  margin-bottom: 18px;
-
-  color: #202124;
-
-  font-size: 14px;
-}
-
-
-.suggestion a {
-  color: #1a0dab;
-
-  text-decoration: none;
-}
-
-
-.suggestion a:hover {
-  text-decoration: underline;
-}
-
-
-/* =========================================
-   件数
-========================================= */
-
-.result-count {
-  margin-bottom: 26px;
-
   color: #70757a;
 
-  font-size: 13px;
+  font-size: 22px;
+
+  cursor: pointer;
 }
 
 
 /* =========================================
-   個々の検索結果
+   ボタン
 ========================================= */
 
-.search-result {
-  margin-bottom: 30px;
+.search-buttons {
+  display: flex;
+
+  justify-content: center;
+
+  gap: 12px;
+
+  margin-top: 30px;
 }
 
+.search-button {
+  padding:
+    10px 18px;
 
-.result-title {
-  display: inline-block;
+  border:
+    1px solid #f8f9fa;
 
-  color: #1a0dab;
+  border-radius: 4px;
 
-  font-size: 20px;
+  background: #f8f9fa;
 
-  line-height: 1.3;
-
-  text-decoration: none;
-
-  cursor: default;
-}
-
-
-.result-title:hover {
-  text-decoration: underline;
-}
-
-
-.result-url {
-  margin-top: 4px;
-
-  color: #188038;
+  color: #3c4043;
 
   font-size: 14px;
 
-  line-height: 1.3;
-
-  word-break: break-all;
+  cursor: pointer;
 }
 
+.search-button:hover {
+  border-color: #dadce0;
 
-.result-description {
-  margin-top: 5px;
-  margin-bottom: 0;
-
-  color: #4d5156;
-
-  font-size: 14px;
-
-  line-height: 1.55;
-
-  word-break: break-all;
+  box-shadow:
+    0 1px 1px
+    rgba(0, 0, 0, 0.1);
 }
 
 
 /* =========================================
-   スマホ・狭い画面
+   一時ダークモード
 ========================================= */
 
-@media (max-width: 700px) {
+body.temporary-dark {
+  background: #111;
 
-  .results-header {
-    height: auto;
+  color: #fff;
+}
 
-    padding: 12px 15px;
+body.temporary-dark
+.header-link {
+  color: #fff;
+}
 
-    gap: 15px;
+
+/* =========================================
+   Error
+========================================= */
+
+.error-overlay {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 5000;
+
+  display: none;
+
+  overflow: hidden;
+
+  background: #000;
+
+  color: #f00;
+
+  font-family: monospace;
+
+  font-size: 32px;
+
+  font-weight: bold;
+}
+
+.error-overlay.active {
+  display: block;
+}
+
+#errorText {
+  padding: 10px;
+
+  line-height: 1.1;
+}
+
+
+/* =========================================
+   最終イベント
+========================================= */
+
+.final-overlay {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 9999;
+
+  display: none;
+
+  overflow: hidden;
+
+  background: #fff;
+}
+
+.final-overlay.active {
+  display: block;
+}
+
+.final-overlay.dark-phase {
+  background: #000;
+}
+
+.final-overlay.blackout {
+  background: #000;
+}
+
+
+/* =========================================
+   赤い人影
+========================================= */
+
+.red-figure {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  width: 150px;
+  height: 360px;
+
+  opacity: 0;
+
+  transform:
+    translate(-50%, -50%);
+
+  pointer-events: none;
+
+  z-index: 1;
+}
+
+.red-figure.active {
+  opacity: 0.9;
+
+  animation:
+    figureMove 4s linear infinite;
+}
+
+.figure-head {
+  position: absolute;
+
+  left: 50%;
+  top: 0;
+
+  width: 82px;
+  height: 100px;
+
+  transform:
+    translateX(-50%);
+
+  background: #d00000;
+
+  border-radius: 50%;
+}
+
+.figure-body {
+  position: absolute;
+
+  left: 50%;
+  top: 82px;
+
+  width: 100px;
+  height: 210px;
+
+  transform:
+    translateX(-50%);
+
+  background: #d00000;
+
+  border-radius:
+    45px 45px 12px 12px;
+}
+
+.figure-arm {
+  position: absolute;
+
+  top: 100px;
+
+  width: 30px;
+  height: 170px;
+
+  background: #d00000;
+
+  border-radius: 20px;
+}
+
+.figure-arm-left {
+  left: 12px;
+
+  transform: rotate(12deg);
+}
+
+.figure-arm-right {
+  right: 12px;
+
+  transform: rotate(-12deg);
+}
+
+@keyframes figureMove {
+
+  0% {
+    transform:
+      translate(-50%, -50%)
+      translate(-180px, 100px);
   }
 
-
-  .results-logo-link {
-    width: 90px;
+  25% {
+    transform:
+      translate(-50%, -50%)
+      translate(140px, -80px);
   }
 
-
-  .results-logo {
-    width: 90px;
+  50% {
+    transform:
+      translate(-50%, -50%)
+      translate(-100px, -140px);
   }
 
-
-  .results-search-form {
-    width: 100%;
+  75% {
+    transform:
+      translate(-50%, -50%)
+      translate(180px, 80px);
   }
 
-
-  .results-main {
-    width: calc(100% - 30px);
-
-    margin-left: auto;
-    margin-right: auto;
-
-    padding-top: 20px;
+  100% {
+    transform:
+      translate(-50%, -50%)
+      translate(-180px, 100px);
   }
+}
 
 
-  .result-title {
-    font-size: 18px;
-  }
+/* =========================================
+   428
+========================================= */
 
+.typing428 {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 2;
+
+  margin: 0;
+
+  padding: 10px;
+
+  overflow: hidden;
+
+  color: #d00000;
+
+  font-family: monospace;
+
+  font-size: 42px;
+
+  font-weight: bold;
+
+  line-height: 1.05;
+
+  white-space: pre-wrap;
+
+  word-break: break-all;
+
+  pointer-events: none;
+}
+
+.final428 {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 10;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  opacity: 0;
+
+  color: #d00000;
+
+  font-size:
+    min(35vw, 420px);
+
+  font-weight: 900;
+
+  pointer-events: none;
+}
+
+.final428.show {
+  opacity: 1;
 }
